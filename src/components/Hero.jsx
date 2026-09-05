@@ -7,11 +7,6 @@ function Hero() {
   });
 
   useEffect(() => {
-    // Mouse parallax is unnecessary on touch devices.
-    if (window.matchMedia("(pointer: coarse)").matches) {
-      return;
-    }
-
     const handleMouseMove = (event) => {
       const x =
         (event.clientX / window.innerWidth - 0.5) * 2;
@@ -25,27 +20,45 @@ function Hero() {
     window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      );
     };
   }, []);
+
+  const currentDate = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+
+  const formattedDate = currentDate.replaceAll("-", ".");
+
+  const systems = ["CODE", "GAMES", "CINEMA", "IDEAS"];
 
   return (
     <section
       id="home"
       className="
-        relative flex min-h-screen
-        items-center overflow-hidden
-        bg-white text-black
-        transition-colors duration-500
+        relative
+        min-h-screen
+        overflow-hidden
+        bg-white
+        text-black
+        transition-colors
+        duration-500
         dark:bg-[#080808]
         dark:text-white
       "
     >
       {/* Background grid */}
+
       <div
         className="
           pointer-events-none
-          absolute inset-0
+          absolute
+          inset-0
           opacity-50
           dark:opacity-30
         "
@@ -73,12 +86,13 @@ function Hero() {
         }}
       />
 
-      {/* Dark mode grid */}
       <div
         className="
           pointer-events-none
-          absolute inset-0
-          hidden opacity-30
+          absolute
+          inset-0
+          hidden
+          opacity-30
           dark:block
         "
         style={{
@@ -105,239 +119,157 @@ function Hero() {
         }}
       />
 
-      {/* Orange glow */}
+      {/* Ambient glow */}
+
       <div
         className="
           pointer-events-none
           absolute
           left-[55%]
-          top-[40%]
-          h-[280px]
-          w-[280px]
+          top-[45%]
+          h-[500px]
+          w-[500px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-orange-500/10
-          blur-[100px]
-          transition-transform
-          duration-700
+          blur-[120px]
           dark:bg-orange-500/15
-          sm:h-[380px]
-          sm:w-[380px]
-          md:h-[500px]
-          md:w-[500px]
         "
-        style={{
-          transform: `
-            translate(
-              ${mousePosition.x * 30}px,
-              ${mousePosition.y * 30}px
-            )
-          `,
-        }}
       />
 
-      {/* Decorative orbital circle */}
+      {/* Main hero layout */}
+
       <div
         className="
-          pointer-events-none
-          absolute
-          right-[-120px]
-          top-[20%]
-          hidden
-          h-[360px]
-          w-[360px]
-          rounded-full
-          border
-          border-black/10
-          dark:border-white/10
-          sm:block
-          md:right-[3%]
-          md:h-[440px]
-          md:w-[440px]
-          lg:right-[8%]
-          lg:top-[22%]
-          lg:h-[420px]
-          lg:w-[420px]
-        "
-        style={{
-          transform: `
-            translate(
-              ${mousePosition.x * -18}px,
-              ${mousePosition.y * -18}px
-            )
-            rotate(${mousePosition.x * 4}deg)
-          `,
-          transition: "transform 0.8s ease-out",
-        }}
-      >
-        <div
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            h-[230px]
-            w-[230px]
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            border
-            border-black/10
-            dark:border-white/10
-            md:h-[300px]
-            md:w-[300px]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            h-2
-            w-2
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            bg-orange-500
-            shadow-[0_0_25px_rgba(249,115,22,0.7)]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            left-1/2
-            top-[-4px]
-            h-2
-            w-2
-            -translate-x-1/2
-            rounded-full
-            bg-orange-500
-          "
-        />
-      </div>
-
-      {/* Main content */}
-      <div
-        className="
-          relative z-10
-          mx-auto w-full max-w-7xl
+          relative
+          z-10
+          mx-auto
+          grid
+          min-h-screen
+          w-full
+          max-w-7xl
+          items-center
+          gap-12
           px-5
-          pb-20 pt-28
-          sm:px-6
-          sm:pb-24 sm:pt-32
+          pb-24
+          pt-32
           md:px-8
-          md:pb-28 md:pt-36
+          lg:grid-cols-[1.1fr_0.9fr]
+          lg:gap-16
+          lg:pt-28
         "
       >
-        {/* Section label */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          <span className="h-px w-7 bg-orange-500 sm:w-10" />
+        {/* =================================
+            LEFT — INTRO
+        ================================== */}
 
-          <p
+        <div>
+          {/* Label */}
+
+          <div className="reveal flex items-center gap-4">
+            <span className="h-px w-10 bg-orange-500" />
+
+            <p
+              className="
+                text-[10px]
+                font-medium
+                uppercase
+                tracking-[0.3em]
+                text-black/50
+                dark:text-white/50
+              "
+            >
+              Personal Introduction
+            </p>
+          </div>
+
+          {/* Name */}
+
+          <div
             className="
-              text-[9px]
-              font-medium
-              uppercase
-              tracking-[0.25em]
-              text-black/50
-              dark:text-white/50
-              sm:text-[10px]
-              sm:tracking-[0.3em]
+              relative
+              mt-8
+              reveal
+              reveal-delay-1
             "
+            style={{
+              transform: `
+                translate(
+                  ${mousePosition.x * 5}px,
+                  ${mousePosition.y * 5}px
+                )
+              `,
+              transition: "transform 0.5s ease-out",
+            }}
           >
-            Personal Introduction
-          </p>
-        </div>
+            <h1
+              className="
+                max-w-6xl
+                text-[18vw]
+                font-medium
+                leading-[0.78]
+                tracking-[-0.08em]
+                sm:text-[14vw]
+                md:text-[12vw]
+                lg:text-[8.7vw]
+              "
+            >
+              Anurag
+              <br />
 
-        {/* Name */}
-        <div
-          className="
-            relative mt-7
-            sm:mt-8
-          "
-          style={{
-            transform: `
-              translate(
-                ${mousePosition.x * 5}px,
-                ${mousePosition.y * 5}px
-              )
-            `,
-            transition: "transform 0.5s ease-out",
-          }}
-        >
-          <h1
-            className="
-              max-w-full
-              text-[18vw]
-              font-medium
-              leading-[0.8]
-              tracking-[-0.08em]
-              sm:text-[15vw]
-              md:text-[12vw]
-              lg:max-w-6xl
-              lg:text-[10vw]
-            "
-          >
-            Anurag
-            <br />
-
-            <span className="text-orange-500">
-              Pandey
-              <span className="text-black dark:text-white">
-                .
+              <span className="text-orange-500">
+                Pandey
+                <span className="text-black dark:text-white">
+                  .
+                </span>
               </span>
-            </span>
-          </h1>
+            </h1>
 
-          {/* Coordinates */}
-          <span
+            <span
+              className="
+                pointer-events-none
+                absolute
+                right-0
+                top-1/2
+                hidden
+                -translate-y-1/2
+                text-[8px]
+                uppercase
+                tracking-[0.25em]
+                text-black/25
+                dark:text-white/20
+                xl:block
+              "
+            >
+              13.08° / 80.27°
+            </span>
+          </div>
+
+          {/* Description */}
+
+          <div
             className="
-              pointer-events-none
-              absolute
-              right-0
-              top-1/2
-              hidden
-              -translate-y-1/2
-              text-[8px]
-              uppercase
-              tracking-[0.25em]
-              text-black/25
-              dark:text-white/20
-              lg:block
+              mt-10
+              max-w-xl
+              reveal
+              reveal-delay-2
             "
           >
-            13.08° / 80.27°
-          </span>
-        </div>
-
-        {/* Description + metadata */}
-        <div
-          className="
-            mt-10
-            grid gap-8
-            md:mt-12
-            md:grid-cols-[1fr_auto]
-            md:items-end
-            md:gap-10
-          "
-        >
-          {/* Description */}
-          <div className="max-w-xl">
             <p
               className="
                 text-sm
                 leading-7
                 text-black/55
                 dark:text-white/50
-                sm:text-base
+                md:text-base
               "
             >
-              I'm a computer science student and an aspiring
-              developer interested in the technical side of
-              things — from building games and websites to
-              experimenting with new technologies.
+              I'm a computer science student and an
+              aspiring developer interested in the
+              technical side of things — from building
+              games and websites to experimenting with
+              new technologies.
             </p>
 
             <p
@@ -349,68 +281,442 @@ function Hero() {
                 dark:text-white/35
               "
             >
-              Currently learning, building and figuring out
-              what comes next.
+              Currently learning, building and figuring
+              out what comes next.
             </p>
           </div>
 
-          {/* Course + Batch */}
+          {/* Course / Batch */}
+
           <div
             className="
+              mt-10
               flex
-              gap-8
+              gap-10
               border-t
               border-black/10
               pt-5
+              reveal
+              reveal-delay-3
               dark:border-white/10
-              sm:gap-12
-              md:border-l
-              md:border-t-0
-              md:pl-8
-              md:pt-0
             "
           >
             <div>
-              <p className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/35">
+              <p
+                className="
+                  text-[9px]
+                  uppercase
+                  tracking-[0.2em]
+                  text-black/40
+                  dark:text-white/35
+                "
+              >
                 Course
               </p>
 
-              <p className="mt-2 text-xs sm:text-sm">
+              <p className="mt-2 text-sm">
                 B.Tech CSE Core
               </p>
             </div>
 
             <div>
-              <p className="text-[9px] uppercase tracking-[0.2em] text-black/40 dark:text-white/35">
+              <p
+                className="
+                  text-[9px]
+                  uppercase
+                  tracking-[0.2em]
+                  text-black/40
+                  dark:text-white/35
+                "
+              >
                 Batch
               </p>
 
-              <p className="mt-2 text-xs sm:text-sm">
+              <p className="mt-2 text-sm">
                 2026 — 2030
               </p>
             </div>
           </div>
         </div>
 
-        {/* Mobile scroll indicator */}
+        {/* =================================
+            RIGHT — CREATIVE CONTROL ROOM
+        ================================== */}
+
         <div
           className="
-            mt-14
-            flex
-            items-center
-            gap-4
-            md:hidden
+            hidden
+            lg:block
+            reveal
+            reveal-delay-2
           "
         >
-          <span className="text-[9px] uppercase tracking-[0.25em] text-black/35 dark:text-white/30">
-            Scroll to explore
-          </span>
+          <div
+            className="
+              relative
+              mx-auto
+              w-full
+              max-w-[430px]
+            "
+            style={{
+              transform: `
+                translate(
+                  ${mousePosition.x * -12}px,
+                  ${mousePosition.y * -12}px
+                )
+              `,
+              transition:
+                "transform 0.8s cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            {/* Control room */}
 
-          <span className="h-px w-12 bg-black/15 dark:bg-white/15" />
+            <div
+              className="
+                relative
+                overflow-hidden
+                border
+                border-black/10
+                bg-white/70
+                p-6
+                shadow-[0_30px_100px_rgba(0,0,0,0.08)]
+                backdrop-blur-xl
+                dark:border-white/10
+                dark:bg-[#0c0c0c]/80
+                dark:shadow-[0_30px_100px_rgba(0,0,0,0.45)]
+                xl:p-7
+              "
+            >
+              {/* Scanlines */}
+
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  opacity-20
+                  dark:opacity-30
+                "
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(to bottom, transparent 0px, transparent 5px, rgba(255,255,255,0.035) 6px)",
+                }}
+              />
+
+              {/* Corner accents */}
+
+              <span className="absolute left-0 top-0 h-px w-16 bg-orange-500" />
+
+              <span className="absolute left-0 top-0 h-16 w-px bg-orange-500" />
+
+              <span className="absolute bottom-0 right-0 h-px w-16 bg-orange-500/50" />
+
+              <span className="absolute bottom-0 right-0 h-16 w-px bg-orange-500/50" />
+
+              <div className="relative">
+                {/* Header */}
+
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p
+                      className="
+                        text-[8px]
+                        uppercase
+                        tracking-[0.3em]
+                        text-black/35
+                        dark:text-white/30
+                      "
+                    >
+                      Personal System
+                    </p>
+
+                    <p
+                      className="
+                        mt-2
+                        text-[10px]
+                        font-medium
+                        uppercase
+                        tracking-[0.2em]
+                        text-orange-500
+                      "
+                    >
+                      Creative Control Room
+                    </p>
+                  </div>
+
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                      border
+                      border-orange-500/20
+                      px-2.5
+                      py-1.5
+                      text-[7px]
+                      uppercase
+                      tracking-[0.2em]
+                      text-orange-500
+                    "
+                  >
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange-500" />
+                    Live
+                  </div>
+                </div>
+
+                {/* Current mode */}
+
+                <div
+                  className="
+                    mt-9
+                    border-y
+                    border-black/10
+                    py-6
+                    dark:border-white/10
+                  "
+                >
+                  <p
+                    className="
+                      text-[8px]
+                      uppercase
+                      tracking-[0.28em]
+                      text-black/30
+                      dark:text-white/25
+                    "
+                  >
+                    Current Mode
+                  </p>
+
+                  <div className="mt-2 flex items-end justify-between gap-4">
+                    <h2
+                      className="
+                        text-5xl
+                        font-medium
+                        leading-none
+                        tracking-[-0.07em]
+                        text-black
+                        dark:text-white
+                        xl:text-6xl
+                      "
+                    >
+                      BUILDING
+                      <span className="text-orange-500">
+                        .
+                      </span>
+                    </h2>
+
+                    <span
+                      className="
+                        pb-1
+                        text-[8px]
+                        uppercase
+                        tracking-[0.2em]
+                        text-black/25
+                        dark:text-white/20
+                      "
+                    >
+                      01
+                    </span>
+                  </div>
+                </div>
+
+                {/* Systems */}
+
+                <div className="mt-6">
+                  <div className="mb-3 flex items-center justify-between">
+                    <p
+                      className="
+                        text-[8px]
+                        uppercase
+                        tracking-[0.28em]
+                        text-black/30
+                        dark:text-white/25
+                      "
+                    >
+                      Active Systems
+                    </p>
+
+                    <p
+                      className="
+                        text-[7px]
+                        uppercase
+                        tracking-[0.18em]
+                        text-orange-500
+                      "
+                    >
+                      04 / 04
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    {systems.map((system, index) => (
+                      <div
+                        key={system}
+                        className="
+                          group
+                          flex
+                          items-center
+                          justify-between
+                          border-b
+                          border-black/5
+                          py-3
+                          dark:border-white/5
+                        "
+                      >
+                        <div className="flex items-center gap-4">
+                          <span
+                            className="
+                              font-mono
+                              text-[8px]
+                              text-black/20
+                              dark:text-white/20
+                            "
+                          >
+                            0{index + 1}
+                          </span>
+
+                          <span
+                            className="
+                              text-[10px]
+                              font-medium
+                              uppercase
+                              tracking-[0.18em]
+                              text-black/60
+                              transition-colors
+                              duration-300
+                              group-hover:text-orange-500
+                              dark:text-white/60
+                              dark:group-hover:text-orange-400
+                            "
+                          >
+                            {system}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="
+                              text-[7px]
+                              uppercase
+                              tracking-[0.15em]
+                              text-black/25
+                              dark:text-white/20
+                            "
+                          >
+                            Active
+                          </span>
+
+                          <span
+                            className="
+                              h-1.5
+                              w-1.5
+                              rounded-full
+                              bg-orange-500
+                              shadow-[0_0_10px_rgba(249,115,22,0.7)]
+                            "
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Status */}
+
+                <div
+                  className="
+                    mt-6
+                    flex
+                    items-end
+                    justify-between
+                    border-t
+                    border-black/10
+                    pt-5
+                    dark:border-white/10
+                  "
+                >
+                  <div>
+                    <p
+                      className="
+                        text-[7px]
+                        uppercase
+                        tracking-[0.22em]
+                        text-black/25
+                        dark:text-white/20
+                      "
+                    >
+                      Status
+                    </p>
+
+                    <p
+                      className="
+                        mt-1
+                        text-[9px]
+                        font-medium
+                        uppercase
+                        tracking-[0.16em]
+                        text-black/60
+                        dark:text-white/55
+                      "
+                    >
+                      Systems Online
+                    </p>
+                  </div>
+
+                  <div className="text-right">
+                    <p
+                      className="
+                        text-[7px]
+                        uppercase
+                        tracking-[0.22em]
+                        text-black/25
+                        dark:text-white/20
+                      "
+                    >
+                      Session Date
+                    </p>
+
+                    <p
+                      className="
+                        mt-1
+                        font-mono
+                        text-[10px]
+                        tracking-[0.12em]
+                        text-orange-500
+                      "
+                    >
+                      {formattedDate}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom detail */}
+
+                <div className="mt-5 flex items-center gap-3">
+                  <span className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+
+                  <span
+                    className="
+                      text-[6px]
+                      uppercase
+                      tracking-[0.3em]
+                      text-black/20
+                      dark:text-white/15
+                    "
+                  >
+                    CODE • CREATE • EXPLORE
+                  </span>
+
+                  <span className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Desktop scroll indicator */}
+      {/* Scroll indicator */}
+
       <div
         className="
           absolute
@@ -423,14 +729,23 @@ function Hero() {
           md:px-3
         "
       >
-        <span className="text-[9px] uppercase tracking-[0.25em] text-black/35 dark:text-white/30">
+        <span
+          className="
+            text-[9px]
+            uppercase
+            tracking-[0.25em]
+            text-black/35
+            dark:text-white/30
+          "
+        >
           Scroll to explore
         </span>
 
         <span className="h-px w-12 bg-black/15 dark:bg-white/15" />
       </div>
 
-      {/* Section number */}
+      {/* Page indicator */}
+
       <div
         className="
           absolute
