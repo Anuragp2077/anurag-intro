@@ -9,7 +9,7 @@ const navItems = [
   { name: "Contact", id: "contact" },
 ];
 
-function Navbar() {
+function Navbar({ dark, onToggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const scrollToSection = (id) => {
@@ -77,12 +77,18 @@ function Navbar() {
             </button>
           ))}
 
-          <ThemeToggle />
+          <ThemeToggle
+            dark={dark}
+            onToggle={onToggleTheme}
+          />
         </div>
 
         {/* Mobile Controls */}
         <div className="flex items-center gap-2 sm:gap-3 md:hidden">
-          <ThemeToggle />
+          <ThemeToggle
+            dark={dark}
+            onToggle={onToggleTheme}
+          />
 
           <button
             type="button"
