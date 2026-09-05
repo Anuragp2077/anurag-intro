@@ -1,16 +1,91 @@
-# React + Vite
+# Anurag Pandey — Personal Introduction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive personal introduction website built with React and Tailwind CSS.
 
-Currently, two official plugins are available:
+The website presents my background, interests, skills, projects and ways to connect with me through a clean, cinematic interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- Responsive design for desktop, tablet and mobile
+- Dark / light mode toggle
+- Theme preference persisted using LocalStorage
+- Smooth scrolling navigation
+- Scroll progress indicator
+- Interactive hover effects
+- Mouse-based parallax effects on the hero section
+- Scroll reveal animations
+- Project showcase with external links
+- Personal interests and hobbies section
+- Social and contact links
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React**
+- **JavaScript**
+- **Vite**
+- **Tailwind CSS**
+- **LocalStorage**
+- **Git & GitHub**
+- **Vercel**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 Project Structure
+
+```text
+anurag-intro/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── profile.png
+│   ├── components/
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Interests.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Projects.jsx
+│   │   ├── Reveal.jsx
+│   │   ├── ScrollProgress.jsx
+│   │   ├── Skills.jsx
+│   │   └── ThemeToggle.jsx
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+└── vite.config.js
+```
+
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Anuragp2077/anurag-intro.git
+```
+
+Navigate into the project:
+
+```bash
+cd anurag-intro
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The website will then be available at the local development URL provided by Vite.
+
+## 📄 License
+
+This project is for personal and educational purposes.
