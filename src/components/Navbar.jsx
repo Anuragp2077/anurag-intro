@@ -7,6 +7,7 @@ const navItems = [
   { name: "Skills", id: "skills" },
   { name: "Projects", id: "projects" },
   { name: "Contact", id: "contact" },
+  { name: "Playground", id: "playground" },
 ];
 
 function Navbar({ dark, onToggleTheme }) {
