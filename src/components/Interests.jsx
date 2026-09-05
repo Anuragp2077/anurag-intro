@@ -153,7 +153,6 @@ function MediaPreview({ interest, isPlaying, onPlay }) {
         "
       />
 
-      {/* Dark overlay */}
       <span
         className="
           pointer-events-none
@@ -166,7 +165,6 @@ function MediaPreview({ interest, isPlaying, onPlay }) {
         "
       />
 
-      {/* Play button */}
       <span
         className="
           absolute
@@ -197,7 +195,6 @@ function MediaPreview({ interest, isPlaying, onPlay }) {
         </span>
       </span>
 
-      {/* Media label */}
       <span
         className="
           pointer-events-none
@@ -241,11 +238,13 @@ function Interests() {
     <section
       id="interests"
       className="
-        relative overflow-hidden
+        relative
+        overflow-hidden
         bg-white
         py-24
         text-black
-        transition-colors duration-500
+        transition-colors
+        duration-500
         dark:bg-[#080808]
         dark:text-white
         sm:py-28
@@ -343,6 +342,7 @@ function Interests() {
             mt-14
             grid
             grid-cols-1
+            items-stretch
             gap-4
             sm:mt-16
             sm:grid-cols-2
@@ -357,6 +357,9 @@ function Interests() {
               <article
                 className="
                   group
+                  flex
+                  h-full
+                  flex-col
                   overflow-hidden
                   border
                   border-black/10
@@ -396,7 +399,7 @@ function Interests() {
                 </div>
 
                 {/* Card content */}
-                <div className="p-5 sm:p-6">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <div className="flex items-start justify-between">
                     <span
                       className="
@@ -454,6 +457,7 @@ function Interests() {
                       onClick={() => setPlayingVideo(null)}
                       className="
                         mt-5
+                        self-start
                         rounded-full
                         border
                         border-black/10
